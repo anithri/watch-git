@@ -58,15 +58,15 @@ You can use the name of any of the format variables on it's own to return only t
 
 ```
 $ watch-git-status name
-uber-project
+> uber-project
 $ watch-git-status added
-3
+> 3
 $ watch-git-status modified
-4
+> 4
 $ watch-git-status untracked
-3
+> 3
 $ watch-git-status delted
-0
+> 0
 ```
 
 You can pass it a format string to return the result of the format.  The format variables are: name, added, modified, untracked, deleted.  use them in a string by surrounding the var name with ```'%{}'```: ```%{name} has %{added} new files!```
