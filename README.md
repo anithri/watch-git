@@ -6,7 +6,7 @@ watch-git is a shell script that handles setting and viewing the currently watch
 
 set ```ENV WATCH_GIT_REPO_FILE=<path>``` to overide the default file of ```~/.watch_git_repo```
 
-```shell
+```
 $ pwd
 > /home/anithri/workspace/watch-git
 
