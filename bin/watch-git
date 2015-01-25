@@ -1,0 +1,69 @@
+#!/bin/bash
+
+git_watch_file=`realpath ${WATCH_GIT_REPO_FILE:-~/.watch_git_repo}`
+cmd=`basename $0`
+usage="USAGE:
+  $cmd                    # => same as $cmd get all
+  $cmd get all
+  $cmd get name
+  $cmd get repo
+  $cmd set <path>         # => name defaults to basename <path>
+  $cmd set <name> <path>
+"
+
+function set_git_watch() {
+  echo "$1" > $git_watch_file
+  echo "$2" >> $git_watch_file
+}
+
+function get_git_watch() {
+  case $1 in
+    ''|all)
+      cat $git_watch_file
+    ;;
+    name)
+      head -n 1 $git_watch_file
+    ;;
+    repo)
+      tail -n 1 $git_watch_file
+    ;;
+    *)
+      echo "don't know how to: $1"
+      exit 1
+    ;;
+  esac
+}
+
+if [ $# -eq 0 ]
+then
+  get_git_watch "all"
+  exit 0
+fi
+
+case $1 in
+  -h|--help|help)
+    echo "$usage"
+    exit 0
+  ;;
+  get)
+    get_git_watch $2
+    exit 0
+  ;;
+  set)
+    if [ $# -eq 2 ]
+    then
+      watch_repo_path=`realpath $2`
+      watch_repo_name=`basename $watch_repo_path`
+      set_git_watch $watch_repo_name $watch_repo_path
+    elif [ $# -eq 3 ]
+    then
+      set_git_watch $2 $3
+    else
+      echo "Too many parameters: $#"
+    fi
+  ;;
+  *)
+    echo "Don't know how to: $1"
+  ;;
+esac
+# vim:filetype=sh
