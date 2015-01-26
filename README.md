@@ -76,3 +76,46 @@ $ watch-git-status "%{name}: +%{added} ~%{modified} ?%{untracked} -%{deleted}"
 > uber-project +3 ~4 ?3 -0
 ```
 
+### i3blocks
+Here is a simple configuration to use the scripts to track your repo
+```
+[git_repo]
+command=~/bin/watch-git-status
+interval=30
+```
+
+And here is a more complicated one to use different colors for each
+
+```ini
+[git_repo]
+command=~/bin/watch-git get name
+interval=15
+separator_block_width=3
+separator=false
+
+[git_added]
+interval=15
+command=~/bin/watch-git-status "+%{added}"
+color=#00FF00
+separator_block_width=3
+separator=false
+
+[git_modified]
+interval=15
+command=~/bin/watch-git-status "~%{modified}"
+color=#00ffff
+separator_block_width=3
+separator=false
+
+[git_untracked]
+interval=15
+command=~/bin/watch-git-status "?%{untracked}"
+color=#FFFF00
+separator=false
+
+[git_deleted]
+interval=15
+command=~/bin/watch-git-status "-%{deleted}"
+color=#FF0000
+separator_block_width=3
+```

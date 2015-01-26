@@ -20,7 +20,6 @@ raw.split(/\n/).group_by { |e| e.split.first }.each_pair do |char, arr|
   next unless trans.has_key?(char) # we don't care about any status we don't track
   summary[trans[char]] += arr.count
 end
-puts summary.inspect
 default_format = '%{name} +%{added} ~%{modified} ?%{untracked} -%{deleted}'
 
 format_param = ''
@@ -33,8 +32,6 @@ else
 end
 
 format = format_param || default_format
-
-puts format
 
 puts format % summary
 # vim:filetype=ruby
