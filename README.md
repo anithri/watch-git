@@ -49,7 +49,7 @@ in the repo file.  I did it in ruby because of the string processing I use, feel
 The default format uses '+' for added and added/modifed. '~' for modified, '?' for untracked, and '-' for deleted.
 
 ```console
-$ watch-git add uber-project .
+$ watch-git set uber-project .
 $ watch-git-status
 uber-project +3 ~4 ?3 -0
 ```
@@ -69,7 +69,10 @@ $ watch-git-status delted
 0
 ```
 
-You can pass it a format string to return the result of the format.  The format variables are: name, added, modified, untracked, deleted.  use them in a string by surrounding the var name with ```'%{}'```: ```%{name} has %{added} new files!```
+You can pass it a format string to return the result of the format.
+The format variables are: name, added, modified, untracked, deleted.
+use them in a string by surrounding the var name with
+````'%{}'```: ```%{name} has %{added} new files!```
 
 ```
 $ watch-git-status "%{name}: +%{added} ~%{modified} ?%{untracked} -%{deleted}"
